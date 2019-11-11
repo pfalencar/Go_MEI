@@ -1,0 +1,117 @@
+﻿create database gomei;
+use gomei;
+CREATE TABLE usuario (
+  id_usuario int not null primary key auto_increment,
+  nome varchar(200) not null,
+  email varchar(200) not null,
+  senha varchar(32) not null
+);
+
+
+insert into usuario (nome, email, senha) values ('Maria','maria@gmail.com', md5('mmm'));
+select * from usuario;
+
+select * from usuario where usuario = 'pat' and senha = md5('ppp');
+
+//apaga os dados da tabela usuario:
+truncate usuario; 
+
+//insere colunas na tabela já existente:
+ALTER TABLE login.usuario  ADD COLUMN nome VARCHAR(100) NOT NULL  AFTER senha;
+ALTER TABLE login.usuario  ADD COLUMN data_cadastro DATETIME NOT NULL  AFTER nome;
+
+select count(*) as total from usuario where usuario = 'pat';
+//Resposta: 0. Porque não tem mais esse usuario na tabela.
+
+insert into usuario (usuario, senha, nome, data_cadastro) values ('pat',md5('um'),'Patricia', NOW());
+=======================================================================================================
+
+CREATE TABLE mei(
+  id_mei int not null auto_increment,
+  razaosocial varchar(200) not null,
+  cnpj varchar(20) not null,
+  ocupacaoprincipal varchar(32) not null,
+  primary key (id_mei)
+);
+
+select * from mei;
+insert into mei (razaosocial, cnpj, ocupacaoprincipal) values ('Mei Joao', '123456789/0001', 'cabeleireiro');
+
+=======================================================================================================
+CREATE TABLE fornecedor (
+  id_fornecedor int not null auto_increment,
+  razaosocial varchar(200) not null,
+  inscricaoestadual varchar(20) not null,
+  inscricaomunicipal varchar(32) not null,
+  primary key (id_fornecedor)
+);
+
+insert into fornecedor (razaosocial, inscricaoestadual, inscricaomunicipal) values ('Fornecedor1', '123456782', '123456782SP');
+select * from fornecedor;
+
+==========================================================================================================
+CREATE TABLE cliente (
+  id_cliente int not null auto_increment,
+  nome varchar(200) not null,
+  cpf varchar(20) not null,
+  genero char(1) not null,
+  cep varchar(20) not null,
+  uf char(2),
+  primary key (id_cliente)
+);
+
+
+insert into cliente (nome, cpf, genero, cep, uf) values 
+('Cliente1','123456789-00','F', '068123-450','SP');
+select * from cliente;
+
+==========================================================================================================
+CREATE TABLE cliente (
+  id_cliente int not null auto_increment,
+  nome varchar(200) not null,
+  cpf varchar(20) not null,
+  email varchar(200) not null,
+  tel varchar(20),
+  cel varchar(20) not null,
+  genero char(1) not null,
+  rg varchar(20),
+  nome_mae varchar(200) not null,
+  nome_pai varchar(200),
+  cep varchar(20) not null,
+  logradouro varchar(200),
+  numerocasa varchar(10) not null, 
+  bairro varchar(100),
+  cidade varchar(200),
+  uf char(2),
+  primary key (id_cliente)
+);
+
+
+insert into cliente (nome, cpf, email, tel, cel, genero, rg, nome_mae, nome_pai, cep, logradouro, numerocasa, bairro, cidade, uf) values 
+('Cliente1','123456789-00','c1@gmail.com','11-5679-1234','11 9 8745-6845','F', '78597123-8','Mãe Cliente1','Pai Cliente1', '068123-450','Rua Amadeus da Silva','45B', 'Brooklin','São Paulo','SP');
+select * from cliente;
+
+
+==========================================================================================================
+CREATE TABLE compra(
+  id_compra int not null auto_increment,
+  id_fornecedor int not null,
+  id_mei int not null,
+  descricaocompra varchar(20) not null,
+  dtcompra date not null,
+  valorcompra decimal(4,2) not null,
+  primary key (id_compra)
+);
+
+
+insert into compra (descricaocompra, dtcompra, valorcompra) values 
+('Compra1',NOW(), 50.21);
+select * from compra;
+
+ALTER TABLE `compra` ADD CONSTRAINT `fk_compra_id_fornecedor` FOREIGN KEY ( `id_fornecedor` ) REFERENCES `fornecedor` ( ` id_fornecedor ` ) ;
+ALTER TABLE `compra` ADD CONSTRAINT `fk_compra_id_mei` FOREIGN KEY ( `id_mei` ) REFERENCES `mei` ( ` id_mei ` ) ;
+
+https://www.devmedia.com.br/criando-uma-chave-estrangeira-no-mysql/20299
+https://pt.stackoverflow.com/questions/138939/chave-estrangeira-inserir-id-da-tabela-1-na-tabela-2-php-mysql
+https://respostas.guj.com.br/15580-como-criar-tabela-com-chave-estrangeira-mysql
+https://forum.imasters.com.br/topic/181400-inserir-chave-estrangeira/
