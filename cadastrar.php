@@ -6,7 +6,7 @@ $nome = mysqli_real_escape_string($conexao, trim($_POST['nome']));
 $email = mysqli_real_escape_string($conexao, trim($_POST['email']));
 $senha = mysqli_real_escape_string($conexao, trim(md5($_POST['senha'])));
 
-$sql = "select count(*) as total from usuario where email = '$email'";
+$sql = "select count(*) as total from mei where email = '$email'";
 
 $result = mysqli_query($conexao, $sql);
 $row = mysqli_fetch_assoc($result);
@@ -17,7 +17,7 @@ if ($row['total'] == 1){
 	exit;	
 
 } elseif ($row['total'] == 0) {
-	$sql = "INSERT INTO usuario (nome, email, senha) VALUES ('$nome', '$email','$senha')";
+	$sql = "INSERT INTO mei (nome, email, senha) VALUES ('$nome', '$email','$senha')";
 	if ($conexao->query($sql) === TRUE) {
 	  $_SESSION['status_cadastro'] = true;
 	  header('Location: cadastro.php');

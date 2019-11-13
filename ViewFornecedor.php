@@ -19,54 +19,68 @@ session_start();
 		</div>
 		<hr>
 
-		<form action="ControllerFornecedor.php" method="POST">
-
-			<?php
-		  	if (isset($_SESSION['status_cadastro'])):
-		  ?>	  
-		    <div>
-				  <p>Cadastro do fornecedor efetuado com sucesso!<br>Voltar para a <a href="painel.php">Página Inicial</a></p>
-				</div>			
-		  <?php
-		    endif;
-				unset($_SESSION['status_cadastro']);
-		  ?> 	
-	  
-		  <?php
-		  	if (isset($_SESSION['fornecedor_existe'])):
-		  ?>		  
-				<div style="color: red">
-				  <p> Este fornecedor já existe! Não é possível cadastrar novamente o mesmo fornecedor.</p>
-				</div>
-		  <?php
-		    endif;
-				unset($_SESSION['fornecedor_existe']);
-		  ?>	
-
-		  <?php
-		  	if (isset($_SESSION['campo_vazio'])):
-		  ?>		  
-				<div style="color: red">
-				  <p> Há algum campo vazio! Verifique se há algum campo em branco.</p>
-				</div>
-		  <?php
-		    endif;
-				unset($_SESSION['campo_vazio']);
-		  ?>	
+		<form action="ControllerFornecedor.php" method="POST"> 
 
 			<div>
-				<h2>Cadastro de Fornecedor</h2>
+				Voltar para a <a href="painel.php">Página Inicial</a></p>
+			</div>			  
 
-				<p>Código do Fornecedor: <input type=text name=codfornecedor></p><br>
-				<p>Razão Social: <input type=text name=razaosocial></p>
-				<p>Inscrição Estadual: <input type=text name=inscricaoestadual></p>
-				<p>Inscrição Municipal: <input type=text name=inscricaomunicipal></p>
 
-			  <br><br>
-		    <button type="submit">Salvar </button>
-				<br>
+			<p><input type=text name=nome>
+			<input type="submit" value="Pesquisar" name="pesquisar"></p> 
+			<h4><a href="CadFornecedor.php"> Novo </a></h4>
+			
+			<div>
+				<h2>Todos os Fornecedores</h2>
+				<table>
+					<tr>
+						<th>Código do Fornecedor</th>
+						<th>Razão Social</th>
+						<th>Inscrição Estadual</th>
+						<th>Inscrição Municipal</th>
+						<th>Editar</th>
+						<th>Deletar</th>						
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>Fornecedor1 Ltda.</td>
+						<td>123456789</td>
+						<td>123456798SP</td>
+						<td>Editar</td>
+						<td>Deletar</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Fornecedor2 Ltda.</td>
+						<td>2123456789</td>
+						<td>2123456798SP</td>
+						<td>Editar</td>
+						<td>Deletar</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Fornecedor3 Ltda.</td>
+						<td>3123456789</td>
+						<td>3123456798SP</td>
+						<td>Editar</td>
+						<td>Deletar</td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td>Fornecedor4 Ltda.</td>
+						<td>4123456789</td>
+						<td>4123456798SP</td>
+						<td>Editar</td>
+						<td>Deletar</td>
+					</tr>
+				</table>
+				<br><br>
+				<br><br>
+		    
+				<br><br>
 
 			</div>
+
 		</form>
 	</body>
 

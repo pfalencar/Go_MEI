@@ -1,15 +1,45 @@
 ﻿create database gomei;
 use gomei;
-CREATE TABLE usuario (
-  id_usuario int not null primary key auto_increment,
+CREATE TABLE mei (
+  id_mei int not null primary key auto_increment,
   nome varchar(200) not null,
   email varchar(200) not null,
-  senha varchar(32) not null
+  senha varchar(32) not null,
+  razaosocial varchar(200),
+  cnpj varchar(20),
+  cpf varchar(15),
+  tel varchar(20),
+  cel varchar(20),
+  sexo char(1),
+  rg varchar(20),
+  nome_mae varchar(200),
+  nome_pai varchar(200),
+  cep varchar(20),
+  logradouro varchar(200),
+  numero varchar(10), 
+  bairro varchar(100),
+  cidade varchar(200),
+  uf char(2)  
 );
 
 
 insert into usuario (nome, email, senha) values ('Maria','maria@gmail.com', md5('mmm'));
 select * from usuario;
+
+===============================================================================================
+create database gomei;
+use gomei;
+CREATE TABLE usuario (
+  id_usuario int not null primary key auto_increment,
+  nome varchar(200) not null,
+  email varchar(200) notf null,
+  senha varchar(32) not null,
+);
+
+
+insert into usuario (nome, email, senha) values ('Maria','maria@gmail.com', md5('mmm'));
+select * from usuario;
+
 
 select * from usuario where usuario = 'pat' and senha = md5('ppp');
 
@@ -39,11 +69,10 @@ insert into mei (razaosocial, cnpj, ocupacaoprincipal) values ('Mei Joao', '1234
 
 =======================================================================================================
 CREATE TABLE fornecedor (
-  id_fornecedor int not null auto_increment,
+  id_fornecedor int not null primary key auto_increment,
   razaosocial varchar(200) not null,
   inscricaoestadual varchar(20) not null,
-  inscricaomunicipal varchar(32) not null,
-  primary key (id_fornecedor)
+  inscricaomunicipal varchar(32) not null
 );
 
 insert into fornecedor (razaosocial, inscricaoestadual, inscricaomunicipal) values ('Fornecedor1', '123456782', '123456782SP');
