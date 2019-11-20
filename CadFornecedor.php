@@ -1,7 +1,7 @@
 <?php
 session_start();
-?>
 
+?>
 
 <!DOCTYPE html>
 <html>
@@ -19,51 +19,24 @@ session_start();
 		</div>
 		<hr>
 
-		<form action="ControllerFornecedor.php" method="POST">
+		<a href="PesquisaFornecedor.php"> Pesquisar Fornecedor </a>
+		
+		<h2>Cadastrar Fornecedor</h2>
+		<?php
+			if( isset($_SESSION['msg']) ) {
+				echo $_SESSION['msg'];
+				unset($_SESSION['msg']);
+			}
+		?>
 
-			<?php
-		  	if (isset($_SESSION['status_cadastro'])):
-		  ?>	  
-		    <div>
-				  <p>Cadastro do fornecedor efetuado com sucesso!<br>Voltar para a <a href="painel.php">Página Inicial</a></p>
-				</div>			
-		  <?php
-		    endif;
-				unset($_SESSION['status_cadastro']);
-		  ?> 	
-	  
-		  <?php
-		  	if (isset($_SESSION['fornecedor_existe'])):
-		  ?>		  
-				<div style="color: red">
-				  <p> Este fornecedor já existe! Não é possível cadastrar novamente o mesmo fornecedor.</p>
-				</div>
-		  <?php
-		    endif;
-				unset($_SESSION['fornecedor_existe']);
-		  ?>	
-
-		  <?php
-		  	if (isset($_SESSION['campo_vazio'])):
-		  ?>		  
-				<div style="color: red">
-				  <p> Há algum campo vazio! Verifique se há algum campo em branco.</p>
-				</div>
-		  <?php
-		    endif;
-				unset($_SESSION['campo_vazio']);
-		  ?>	
-
+		<form action="proc_cad_fornecedor.php" method="POST">
 			<div>
-				<h2>Cadastro de Fornecedor</h2>
-
-				<p>Código do Fornecedor: <input type=text name=codfornecedor></p><br>
+				<input type="hidden" name=codfornecedor></p>
 				<p>Razão Social: <input type=text name=razaosocial></p>
 				<p>Inscrição Estadual: <input type=text name=inscricaoestadual></p>
 				<p>Inscrição Municipal: <input type=text name=inscricaomunicipal></p>
-
-			  <br><br>
-		    <input type="submit" value="Salvar" name="salvar">
+				<br><br>
+			    <input type="submit" value="Salvar" name="salvar">
 			
 				<br>
 

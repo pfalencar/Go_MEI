@@ -20,8 +20,8 @@ include('verifica_login.php');
 			<ul>
 				<li><a href="ViewMei.php">Cadastrar MEI</a></li>
 				<li><a href="ViewFuncionario.php">Cadastrar Funcionário</a></li>
-				<li><a href="ViewCliente.php">Cadastrar Cliente</a></li>
-				<li><a href="ViewFornecedor.php">Cadastrar Fornecedor</a></li>
+				<li><a href="PesquisaCliente.php">Cliente</a></li>
+				<li><a href="PesquisaFornecedor.php">Fornecedor</a></li>
 				<li><a href="ViewProduto.php">Cadastrar Produto</a></li>
 				<li><a href="ViewServico.php">Cadastrar Serviço</a></li>
 				<li><a href="ViewVenda.php">Realizar Venda</a></li>

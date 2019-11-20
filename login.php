@@ -19,7 +19,9 @@ $row = mysqli_num_rows($result);
 
 if ($row == 1){
 	$resposta_bd = mysqli_fetch_assoc($result);
+	$_SESSION['id_mei'] = $resposta_bd['id_mei'];
 	$_SESSION['nome'] = $resposta_bd['nome'];
+	$_SESSION['senha'] = $resposta_bd['senha'];
 	header('Location: painel.php');
 	exit();
 

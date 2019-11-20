@@ -7,6 +7,8 @@ CREATE TABLE mei (
   senha varchar(32) not null,
   razaosocial varchar(200),
   cnpj varchar(20),
+  ocupacaoprincipal varchar(200),
+  ocupacaosecundaria varchar(200),
   cpf varchar(15),
   tel varchar(20),
   cel varchar(20),
@@ -22,6 +24,8 @@ CREATE TABLE mei (
   uf char(2)  
 );
 
+UPDATE mei SET razaosocial ='Paloma Ltda.', cnpj='123456789-78', ocupacaoprincipal='programadora independente' WHERE email='paloma@gmail.com'
+UPDATE mei SET razaosocial= , cnpj= , ocupacaoprincipal= WHERE email=$email;
 
 insert into usuario (nome, email, senha) values ('Maria','maria@gmail.com', md5('mmm'));
 select * from usuario;
@@ -78,6 +82,7 @@ CREATE TABLE fornecedor (
 insert into fornecedor (razaosocial, inscricaoestadual, inscricaomunicipal) values ('Fornecedor1', '123456782', '123456782SP');
 select * from fornecedor;
 
+INSERT INTO fornecedor (razaosocial, inscricaoestadual, inscricaomunicipal) VALUES ('Forn2', '23456789', '23456789SP')
 ==========================================================================================================
 CREATE TABLE cliente (
   id_cliente int not null auto_increment,
