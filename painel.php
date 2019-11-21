@@ -22,8 +22,8 @@ include('verifica_login.php');
 				<li><a href="ViewFuncionario.php">Cadastrar Funcionário</a></li>
 				<li><a href="PesquisaCliente.php">Cliente</a></li>
 				<li><a href="PesquisaFornecedor.php">Fornecedor</a></li>
-				<li><a href="ViewProduto.php">Cadastrar Produto</a></li>
-				<li><a href="ViewServico.php">Cadastrar Serviço</a></li>
+				<li><a href="PesquisaEstoque.php">Estoque</a></li>
+				<li><a href="PesquisaServico.php">Serviço</a></li>
 				<li><a href="ViewVenda.php">Realizar Venda</a></li>
 				<li><a href="ViewCompra.php">Efetuar Compra</a></li>
 				<li><a href="ViewContratacao.php">Contratar Funcionário</a></li>

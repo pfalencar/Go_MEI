@@ -1,5 +1,44 @@
 ﻿create database gomei;
 use gomei;
+
+CREATE TABLE estoque(
+  id_estoque INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  descricaoestoque VARCHAR(200),
+  preco DECIMAL(4,2) NOT NULL,
+  quantidade DECIMAL(4,2) NOT NULL
+);
+
+INSERT INTO estoque (descricaoestoque, preco, quantidade) VALUES ('Escova de cabelo','15.00', '1.00');
+INSERT INTO estoque (descricaoestoque, preco, quantidade) VALUES ('Shampoo Camomila','25.00', '3.00');
+
+ALTER TABLE gomei.estoque MODIFY preco DECIMAL (7,2) NOT NULL;
+ALTER TABLE gomei.estoque MODIFY quantidade DECIMAL (7,2) NOT NULL;
+ALTER TABLE gomei.estoque MODIFY descricaoestoque VARCHAR(200) NOT NULL;
+
+INSERT INTO estoque (descricaoestoque, preco, quantidade) VALUES ('Secador','20000.00', '200.00');
+
+CREATE TABLE estoque(
+  id_estoque INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  descricaoestoque VARCHAR(200) NOT NULL,
+  preco DECIMAL(7,2) NOT NULL,
+  quantidade DECIMAL(7,2) NOT NULL
+);
+===========================================================================================================
+
+CREATE TABLE servico(
+  id_servico INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  descricaoservico VARCHAR(200) NOT NULL,
+  precoservico DECIMAL(7,2) NOT NULL,
+  quantidadeservico DECIMAL(7,2) NOT NULL
+);
+
+INSERT INTO servico (descricaoservico, precoservico, quantidadeservico) VALUES ('Cortar grama','20.00', '1.00');
+INSERT INTO servico (descricaoservico, precoservico, quantidadeservico) VALUES ('Cortar cabelo', '20.00', '1.00');
+UPDATE servico SET descricaoservico='Cortar árvore', precoservico='80.00', quantidadeservico='2.00' WHERE id_servico = '1';
+
+
+===========================================================================================================
+
 CREATE TABLE mei (
   id_mei int not null primary key auto_increment,
   nome varchar(200) not null,

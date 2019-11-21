@@ -48,33 +48,34 @@ include("Conexao.php");
 
 		<div>
 				
-				<table>
-					<tr>
-						<th>Id Cliente</th>
-						<th>Nome</th>
-						<th>CPF</th>
-						<th>Sexo</th>
-						<th>CEP</th>
-						<th>UF</th>	
-						<th>Editar</th>
-						<th>Deletar</th>						
-					</tr>
+			<table>
+				<tr>
+					<th>Id Cliente</th>
+					<th>Nome</th>
+					<th>CPF</th>
+					<th>Sexo</th>
+					<th>CEP</th>
+					<th>UF</th>	
+					<th>Editar</th>
+					<th>Deletar</th>						
+				</tr>
 
 
 		  		<?php
 
 		  			while( $row_cliente = mysqli_fetch_assoc($resultado_cliente) ) {
 		
-							echo "	<tr>
-												<td>" . $row_cliente['id_cliente'] . "</td>
-												<td>" . $row_cliente['nome'] . "</td>
-												<td>" . $row_cliente['cpf'] . "</td>
-												<td>" . $row_cliente['genero'] . "</td>
-												<td>" . $row_cliente['cep'] . "</td>
-												<td>" . $row_cliente['uf'] . "</td>
-												<td><a href='edit_cliente.php?id=" . $row_cliente['id_cliente'] . "'>Editar</a></td>
-												<td><a href='proc_apagar_cliente.php?id=" . $row_cliente['id_cliente'] . "'>Apagar</a></td>
-											</tr>";
+						echo 
+							"<tr>
+								<td>" . $row_cliente['id_cliente'] . "</td>
+								<td>" . $row_cliente['nome'] . "</td>
+								<td>" . $row_cliente['cpf'] . "</td>
+								<td>" . $row_cliente['genero'] . "</td>
+								<td>" . $row_cliente['cep'] . "</td>
+								<td>" . $row_cliente['uf'] . "</td>
+								<td><a href='edit_cliente.php?id=" . $row_cliente['id_cliente'] . "'>Editar</a></td>
+								<td><a href='proc_apagar_cliente.php?id=" . $row_cliente['id_cliente'] . "'>Apagar</a></td>
+							</tr>";
 		  			}
 			}
 					?>
