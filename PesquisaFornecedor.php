@@ -27,6 +27,12 @@ include("Conexao.php");
 
 		<a href="CadFornecedor.php"> Novo </a>
 
+		<?php
+		  if( isset($_SESSION['msg']) ) {
+			  echo $_SESSION['msg'];
+			  unset($_SESSION['msg']);
+		  }
+		?>
 
 		<form action="" method="POST"> 		
 

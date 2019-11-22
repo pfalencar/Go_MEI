@@ -11,14 +11,14 @@ if (!empty($id)){
 
 	if (mysqli_affected_rows($conexao)){
 		$_SESSION['msg'] = "<p style='color:green'>Fornecedor apagado com sucesso</p>";
-		header("Location:edit_fornecedor.php");
+		header("Location:PesquisaFornecedor.php");
 	} else {
 		$_SESSION['msg'] = "<p style='color:red'>Fornecedor não foi apagado com sucesso</p>";
-		header("Location:edit_fornecedor.php");
+		header("Location:PesquisaFornecedor.php");
 	}
 	
 } else {
 	$_SESSION['msg'] = "<p style='color:red'>Necessário selecionar um fornecedor</p>";
-	header("Location:edit_fornecedor.php");
+	header("Location:PesquisaFornecedor.php");
 }
 ?>

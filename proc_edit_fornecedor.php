@@ -18,7 +18,7 @@ $resultado_usuario = mysqli_query($conexao, $result_fornecedor);
 
 if (mysqli_affected_rows($conexao)){
 	$_SESSION['msg'] = "<p style='color:green'>Fornecedor editado com sucesso</p>";
-	header("Location:PesquisaFornecedor.php");
+	header("Location:edit_fornecedor.php");
 } else {
 	$_SESSION['msg'] = "<p style='color:red'>Fornecedor não foi editado com sucesso</p>";
 	header("Location:edit_fornecedor.php?id=");

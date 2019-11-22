@@ -1,0 +1,104 @@
+create database gomei;
+use gomei;
+
+CREATE TABLE compra(
+  id_compra INT NOT NULL AUTO_INCREMENT,
+  id_fornecedor INT,
+  id_mei INT,
+  descricaocompra VARCHAR(200) NOT NULL,
+  dtcompra DATETIME NOT NULL,
+  valorcompra DECIMAL(7,2) NOT NULL,
+  PRIMARY KEY (id_compra),
+  FOREIGN KEY (id_fornecedor) REFERENCES fornecedor(id_fornecedor),
+  FOREIGN KEY (id_mei) REFERENCES mei (id_mei)
+) ENGINE = innodb;
+
+ALTER TABLE fornecedor ENGINE = InnoDB;
+ALTER TABLE mei ENGINE = InnoDB;
+
+INSERT INTO compra (descricaocompra, dtcompra, valorcompra) VALUES ('Pneu de bicicleta', NOW(), '50.00');
+
+ALTER TABLE cliente ENGINE = InnoDB;
+ALTER TABLE mei ENGINE = InnoDB;
+ALTER TABLE servico ENGINE = InnoDB;
+ALTER TABLE estoque ENGINE = InnoDB;
+
+CREATE TABLE venda (
+  id_venda INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id_mei INT,
+  id_cliente  INT,
+  id_servico INT,
+  id_estoque  INT,
+  produto_servico VARCHAR(200) NOT NULL,
+  dtvenda DATETIME NOT NULL,
+  qtd DECIMAL(7,2) NOT NULL,
+  valortotal DECIMAL(7,2) NOT NULL,
+  valorrecebido DECIMAL(7,2) NOT NULL,
+  troco DECIMAL(7,2) NOT NULL,
+  formapgto VARCHAR(20)
+) ENGINE = innodb;
+
+INSERT INTO venda (produto_servico, dtvenda, qtd, valortotal, valorrecebido, troco, formapgto) VALUES ('agua mineral', NOW(), 2.00, 10.00, 20.00, 10.00, 'dinheiro');
+INSERT INTO venda (produto_servico, dtvenda, qtd, valortotal, valorrecebido, troco, formapgto) VALUES ('sapato preto', NOW(), 1.00, 100.00, 100.00, 0.00, 'dinheiro');
+INSERT INTO venda (produto_servico, dtvenda, qtd, valortotal, valorrecebido, troco, formapgto) VALUES ('camiseta amarela', NOW(), 1.00, 80.00, 100.00, 20.00, 'dinheiro');
+INSERT INTO venda (produto_servico, dtvenda, qtd, valortotal, valorrecebido, troco, formapgto) VALUES ('celular', NOW(), 1.00, 800.00, 800.00, 0.00, 'dinheiro');
+
+UPDATE venda set id_estoque = '7' WHERE id_venda = '1';
+UPDATE venda set id_estoque = '11' WHERE id_venda = '2';
+UPDATE venda set id_estoque = '1' WHERE id_venda = '3';
+UPDATE venda set id_estoque = '12' WHERE id_venda = '4';
+
+DELETE FROM estoque WHERE id_estoque = '7';
+
+SELECT id_venda, produto_servico, id_estoque FROM venda;
+SELECT descricaoestoque FROM estoque;
+
+SELECT v.id_venda, v.produto_servico, e.id_estoque, e.descricaoestoque FROM venda AS v INNER JOIN estoque AS e ON v.id_estoque = e.id_estoque ORDER BY v.id_venda;
+
+ALTER TABLE venda ADD FOREIGN KEY(id_mei) REFERENCES mei(id_mei);
+ALTER TABLE venda ADD FOREIGN KEY(id_cliente) REFERENCES cliente(id_cliente);
+ALTER TABLE venda ADD FOREIGN KEY(id_servico) REFERENCES servico(id_servico);
+ALTER TABLE venda ADD FOREIGN KEY(id_estoque) REFERENCES estoque(id_estoque);
+
+
+ALTER TABLE `venda` ADD CONSTRAINT `fk_venda_id_estoque` FOREIGN KEY ( `id_estoque` ) REFERENCES `estoque` ( `id_estoque` );
+ALTER TABLE `venda` ADD CONSTRAINT `fk_venda_id_servico` FOREIGN KEY ( `id_servico` ) REFERENCES `servico` ( `id_servico` );
+ALTER TABLE `venda` ADD CONSTRAINT `fk_venda_id_cliente` FOREIGN KEY ( `id_cliente` ) REFERENCES `cliente` ( `id_cliente` );
+ALTER TABLE `venda` ADD CONSTRAINT `fk_venda_id_mei` FOREIGN KEY ( `id_mei` ) REFERENCES `mei` ( `id_mei` );
+
+
+CREATE TABLE estoque(
+  id_estoque INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  descricaoestoque VARCHAR(200) NOT NULL,
+  preco DECIMAL(7,2) NOT NULL,
+  quantidade DECIMAL(7,2) NOT NULL
+) ENGINE = innodb;
+
+INSERT INTO estoque (descricaoestoque, preco, quantidade) VALUES ('teclado', 50.00, 1);
+
+CREATE TABLE servico(
+  id_servico INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  descricaoservico VARCHAR(200) NOT NULL,
+  precoservico DECIMAL(7,2) NOT NULL,
+  quantidadeservico DECIMAL(7,2) NOT NULL
+) ENGINE = innodb;
+
+
+CREATE TABLE cliente (
+  id_cliente int not null auto_increment,
+  nome varchar(200) not null,
+  cpf varchar(20) not null,
+  genero char(1) not null,
+  cep varchar(20) not null,
+  uf char(2),
+  primary key (id_cliente)
+) ENGINE = innodb;
+
+
+CREATE TABLE mei(
+  id_mei int not null auto_increment,
+  razaosocial varchar(200) not null,
+  cnpj varchar(20) not null,
+  ocupacaoprincipal varchar(32) not null,
+  primary key (id_mei)
+) ENGINE = innodb;

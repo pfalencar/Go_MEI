@@ -1,6 +1,23 @@
 ﻿create database gomei;
 use gomei;
 
+CREATE TABLE venda (
+  id_venda INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id_mei FOREIGN KEY,
+  id_cliente FOREIGN KEY,
+  id_servico FOREIGN KEY,
+  id_estoque FOREIGN KEY,
+  produto_servico VARCHAR(200) NOT NULL,
+  dtvenda DATETIME NOT NULL,
+  qtd DECIMAL(7,2) NOT NULL,
+  valortotal DECIMAL(7,2) NOT NULL,
+  valorrecebido DECIMAL(7,2) NOT NULL,
+  troco DECIMAL(7,2) NOT NULL,
+  formapgto VARCHAR(20)
+);
+
+
+===========================================================================================================
 CREATE TABLE estoque(
   id_estoque INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   descricaoestoque VARCHAR(200),
@@ -52,7 +69,7 @@ CREATE TABLE mei (
   tel varchar(20),
   cel varchar(20),
   sexo char(1),
-  rg varchar(20),
+  rg VARCHAR(20),
   nome_mae varchar(200),
   nome_pai varchar(200),
   cep varchar(20),
@@ -62,6 +79,9 @@ CREATE TABLE mei (
   cidade varchar(200),
   uf char(2)  
 );
+
+UPDATE mei SET razaosocial='Paloma Ltda', cnpj='123456789-78', ocupacaoprincipal='programadora independente', ocupacaosecundaria='Professora', cpf='456789123-00', tel='51 45678932', cel = '51 45678923', sexo='F', rg='789435498-3', nome_mae='Dona Lucrécia', nome_pai='Seu Sebastião', cep='06812-154', logradouro='Rua Boituva', numero='45A', bairro='São Nicolau', cidade='Porto Alegre', uf='RS' WHERE id_mei = '1'
+
 
 UPDATE mei SET razaosocial ='Paloma Ltda.', cnpj='123456789-78', ocupacaoprincipal='programadora independente' WHERE email='paloma@gmail.com'
 UPDATE mei SET razaosocial= , cnpj= , ocupacaoprincipal= WHERE email=$email;
@@ -167,13 +187,15 @@ select * from cliente;
 
 ==========================================================================================================
 CREATE TABLE compra(
-  id_compra int not null auto_increment,
-  id_fornecedor int not null,
-  id_mei int not null,
-  descricaocompra varchar(20) not null,
-  dtcompra date not null,
-  valorcompra decimal(4,2) not null,
-  primary key (id_compra)
+  id_compra INT NOT NULL AUTO_INCREMENT,
+  id_fornecedor INT NOT NULL,
+  id_mei INT NOT NULL,
+  descricaocompra VARCHAR(200) NOT NULL,
+  dtcompra DATETIME NOT NULL,
+  valorcompra DECIMAL(7,2) NOT NULL,
+  PRIMARY KEY (id_compra),
+  FOREIGN KEY (id_fornecedor) REFERENCES fornecedor(id_fornecedor),
+  FOREIGN KEY (id_mei) REFERENCES mei (id_mei)
 );
 
 

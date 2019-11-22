@@ -11,7 +11,7 @@ if( empty($_POST['email']) || empty($_POST['senha']) ) {
 $email = mysqli_real_escape_string($conexao, $_POST['email']);
 $senha = mysqli_real_escape_string($conexao, $_POST['senha']);
 
-$query = "select nome from mei where email = '{$email}' and senha = md5('{$senha}')";
+$query = "SELECT id_mei, nome FROM mei WHERE email = '{$email}' AND senha = md5('{$senha}')";
 
 $result = mysqli_query($conexao, $query);
 
