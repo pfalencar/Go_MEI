@@ -20,14 +20,14 @@ include('verifica_login.php');
 		<div>
 			<ul>
 				<li><a href="CadMEI.php">Cadastrar MEI</a></li>
-				<li><a href="ViewFuncionario.php">Cadastrar Funcionário</a></li>
+				<li><a href="PesquisaFuncionario.php">Funcionário</a></li>
 				<li><a href="PesquisaCliente.php">Cliente</a></li>
 				<li><a href="PesquisaFornecedor.php">Fornecedor</a></li>
 				<li><a href="PesquisaEstoque.php">Estoque</a></li>
 				<li><a href="PesquisaServico.php">Serviço</a></li>
 				<li><a href="ViewVenda.php">Realizar Venda</a></li>
 				<li><a href="PesquisaCompra.php">Compra</a></li>
-				<li><a href="ViewContratacao.php">Contratar Funcionário</a></li>
+				<li><a href="PesquisaContrato.php">Contrato de Funcionário</a></li>
 			</ul>
 		</div>
 

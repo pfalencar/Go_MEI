@@ -1,6 +1,55 @@
 ﻿create database gomei;
 use gomei;
 
+CREATE TABLE contrato (
+  id_contrato INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id_mei INT NOT NULL,
+  id_funcionario INT NOT NULL,
+  iniciocontrato DATETIME NOT NULL,
+  fimcontrato DATE,
+  horarioservico VARCHAR(200) NOT NULL,
+  valorhora VARCHAR(20) NOT NULL,
+  dtpagamento VARCHAR(100) NOT NULL,
+  valorpagamento DECIMAL(7,2) NOT NULL,
+  FOREIGN KEY (id_mei) REFERENCES mei (id_mei),
+  FOREIGN KEY (id_funcionario) REFERENCES funcionario (id_funcionario)
+);
+
+INSERT INTO contrato (id_mei, id_funcionario, iniciocontrato, fimcontrato, horarioservico, valorhora, dtpagamento, valorpagamento) VALUES ('1', '5', NOW(),'2019-11-25','8h - 17h','R$ 20.00','dias 15 e 28','3200')
+
+===========================================================================================================
+CREATE TABLE funcionario(
+  id_funcionario int not null auto_increment,
+  nome varchar(200) not null,
+  cpf varchar(20) not null,
+  email varchar(200) not null,
+  tel varchar(20),
+  cel varchar(20) not null,
+  sexo char(1) not null,
+  rg varchar(20),
+  nome_mae varchar(200) not null,
+  nome_pai varchar(200),
+  cep varchar(20) not null,
+  logradouro varchar(200),
+  numero varchar(10) not null, 
+  bairro varchar(100),
+  cidade varchar(200),
+  uf char(2),
+  ctps VARCHAR(20),
+  pispasep VARCHAR(20),
+  numeroconta VARCHAR(20),
+  tipoconta VARCHAR(50),
+  nomebanco VARCHAR(50),
+  agenciabancaria VARCHAR(20),
+  primary key (id_funcionario)
+);
+
+INSERT INTO funcionario (nome, cpf, email, tel, cel, sexo, rg, nome_mae, nome_pai, cep, logradouro, numero, bairro, cidade, uf, ctps, pispasep, numeroconta, tipoconta, nomebanco, agenciabancaria) VALUES 
+('Funcionario1','123456789-00','f1@gmail.com','11-5679-1234','11 9 8745-6845','F', '78597123-8','Mãe Funcionario1','Pai Funcionario1', '068123-450','Rua Amadeus da Silva','45B', 'Brooklin','São Paulo','SP','457898-1', '867.13583.96-4', '26306-5', 'corrente', 'Itaú', '9395');
+
+===========================================================================================================
+
+
 CREATE TABLE venda (
   id_venda INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   id_mei FOREIGN KEY,
@@ -86,8 +135,8 @@ UPDATE mei SET razaosocial='Paloma Ltda', cnpj='123456789-78', ocupacaoprincipal
 UPDATE mei SET razaosocial ='Paloma Ltda.', cnpj='123456789-78', ocupacaoprincipal='programadora independente' WHERE email='paloma@gmail.com'
 UPDATE mei SET razaosocial= , cnpj= , ocupacaoprincipal= WHERE email=$email;
 
-insert into usuario (nome, email, senha) values ('Maria','maria@gmail.com', md5('mmm'));
-select * from usuario;
+insert into mei (nome, email, senha) values ('Maria','maria@gmail.com', md5('mmm'));
+select * from mei;
 
 ===============================================================================================
 create database gomei;

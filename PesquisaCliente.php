@@ -21,7 +21,15 @@ include("Conexao.php");
 		<hr>
 
 		<p>Voltar para a <a href="painel.php">Página Inicial</a></p>
-
+		<br>
+		<p>  
+	  		<?php  
+	  		if ( isset($_SESSION['msg']) ) {
+	  			echo $_SESSION['msg'];
+	  			unset($_SESSION['msg']);
+	  		}
+	  		 ?>
+		</p>
 
 		<h1>Pesquisar Cliente</h1>
 

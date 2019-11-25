@@ -1,6 +1,22 @@
 create database gomei;
 use gomei;
 
+=======================================================================================================
+CREATE TABLE fornecedor (
+  id_fornecedor int not null auto_increment,
+  id_user_mei INT NOT NULL,
+  razaosocial varchar(200) not null,
+  inscricaoestadual varchar(20) not null,
+  inscricaomunicipal varchar(32) not null,
+  PRIMARY KEY (id_fornecedor),
+  FOREIGN KEY (id_user_mei) REFERENCES mei (id_mei)
+);
+
+insert into fornecedor (id_user_mei, razaosocial, inscricaoestadual, inscricaomunicipal) values ('1', 'Fornecedor1', '123456782', '123456782SP');
+select * from fornecedor;
+
+INSERT INTO fornecedor (id_user_mei, razaosocial, inscricaoestadual, inscricaomunicipal) VALUES ('1', Forn2', '23456789', '23456789SP')
+=======================================================================================================
 CREATE TABLE compra(
   id_compra INT NOT NULL AUTO_INCREMENT,
   id_fornecedor INT,
