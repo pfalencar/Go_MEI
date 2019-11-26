@@ -14,7 +14,7 @@ include("Conexao.php");
 	<body>		
 		<div class="cabecalho">
 			<h2> Olá, 
-	  		<?php  echo $_SESSION['nome']; ?>!
+	  		<?php  echo $_SESSION['nome_usuario']; ?>!
 			</h2>
 			<h2> <a href="logout.php"> Sair </a> </h2>
 		</div>
@@ -44,13 +44,14 @@ include("Conexao.php");
 		</form>	
 
 		<?php
-			//recebendo o botão
-		  $SendPesqUser = filter_input(INPUT_POST, 'SendPesqUser', FILTER_SANITIZE_STRING);
+		  $idusuario = $_SESSION['id_usuario'];
+
+		   $SendPesqUser = filter_input(INPUT_POST, 'SendPesqUser', FILTER_SANITIZE_STRING);
 
 		  //verificando se clicou no botao
 		  if ($SendPesqUser) {
 		  	$nomeCliente = filter_input(INPUT_POST,'nomeCliente', FILTER_SANITIZE_STRING);
-		  	$result_cliente = "SELECT * FROM cliente WHERE nome LIKE '%$nomeCliente%'";
+		  	$result_cliente = "SELECT * FROM cliente WHERE id_usuario = '$idusuario' AND nome LIKE '%$nomeCliente%'";
 		  	$resultado_cliente = mysqli_query($conexao, $result_cliente);
 		?>
 
@@ -61,11 +62,19 @@ include("Conexao.php");
 					<th>Id Cliente</th>
 					<th>Nome</th>
 					<th>CPF</th>
+					<th>E-mail</th>
+					<th>Telefone</th>
+					<th>Celular</th>
 					<th>Sexo</th>
+					<th>RG</th>
+					<th>Nome da mãe</th>
+					<th>Nome do pai</th>					
 					<th>CEP</th>
-					<th>UF</th>	
-					<th>Editar</th>
-					<th>Deletar</th>						
+					<th>Logradouro</th>
+					<th>Número</th>
+					<th>Bairro</th>
+					<th>Cidade</th>
+					<th>UF</th>							
 				</tr>
 
 
@@ -78,15 +87,25 @@ include("Conexao.php");
 								<td>" . $row_cliente['id_cliente'] . "</td>
 								<td>" . $row_cliente['nome'] . "</td>
 								<td>" . $row_cliente['cpf'] . "</td>
-								<td>" . $row_cliente['genero'] . "</td>
+								<td>" . $row_cliente['email'] . "</td>
+								<td>" . $row_cliente['tel'] . "</td>
+								<td>" . $row_cliente['cel'] . "</td>
+								<td>" . $row_cliente['sexo'] . "</td>
+								<td>" . $row_cliente['rg'] . "</td>
+								<td>" . $row_cliente['nome_mae'] . "</td>
+								<td>" . $row_cliente['nome_pai'] . "</td>			
 								<td>" . $row_cliente['cep'] . "</td>
+								<td>" . $row_cliente['logradouro'] . "</td>
+								<td>" . $row_cliente['numero'] . "</td>
+								<td>" . $row_cliente['bairro'] . "</td>			
+								<td>" . $row_cliente['cidade'] . "</td>
 								<td>" . $row_cliente['uf'] . "</td>
 								<td><a href='edit_cliente.php?id=" . $row_cliente['id_cliente'] . "'>Editar</a></td>
 								<td><a href='proc_apagar_cliente.php?id=" . $row_cliente['id_cliente'] . "'>Apagar</a></td>
 							</tr>";
 		  			}
 			}
-					?>
+				?>
 		
 			</table>
 				<br><br>

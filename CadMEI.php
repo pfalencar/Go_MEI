@@ -13,7 +13,7 @@ session_start();
 	<body>
 		<div class="cabecalho">
 			<h2> Olá, 
-	  		<?php  echo $_SESSION['nome']; ?>!
+	  		<?php  echo $_SESSION['nome_usuario']; ?>!
 
 			</h2>
 			<h2> <a href="logout.php"> Sair </a> </h2>
@@ -22,19 +22,45 @@ session_start();
 
 		<p>Voltar para a <a href="painel.php">Página Inicial</a></p>
 
-		<a href="edit_mei.php?id="<?php echo $_SESSION['id_mei'] ?>"">Editar</a>
+		<a href="edit_mei.php?id='<?php echo $_SESSION['id_usuario'] ?>'">Editar</a>
 		
 		<h2>Cadastrar MEI</h2>
+
 		<?php
+
 			if( isset($_SESSION['msg']) ) {
 				echo $_SESSION['msg'];
 				unset($_SESSION['msg']);
 			}
+
+		  	if (isset($_SESSION['status_cadastro'])):
+
+		?>	  
+		    <div>
+				<p>Cadastro efetuado com sucesso!</p>
+			</div>	
+
+		<?php
+		    endif;
+				unset($_SESSION['status_cadastro']);
+		?> 	
+	  
+		<?php
+		  	if (isset($_SESSION['mei_existe'])):
+		?>		  
+				<div style="color: red">
+				  <p> O MEI já foi cadastrado! Não é possível cadastrar mais de um MEI por usuário no sistema.</p>
+				</div>
+		  <?php
+		    endif;
+				unset($_SESSION['mei_existe']);
+			 	
 		?>
 
 		<form action="proc_cad_mei.php" method="POST">
 			
-			  <input type="hidden" name=codmei></p><br>
+			  <label>Nome completo: </label>
+			  <input type="text" name="nomecompleto" required><br><br>
 
 			  <label>Razao Social: </label>
 			  <input type="text" name="razaosocial" required><br><br>

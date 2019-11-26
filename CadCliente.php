@@ -13,7 +13,7 @@ session_start();
 	<body>
 		<div class="cabecalho">
 			<h2> Olá, 
-	  		<?php  echo $_SESSION['nome']; ?>!
+	  		<?php  echo $_SESSION['nome_usuario']; ?>!
 			</h2>
 			<h2> <a href="logout.php"> Sair </a> </h2>
 		</div>
@@ -31,20 +31,50 @@ session_start();
 
 		<form action="proc_cad_cliente.php" method="POST">
 			
-			  <input type="hidden" name=codcliente></p><br>
+			  <input type="hidden" name=codcliente></p>
 
 			  <label>Nome: </label>
-			  <input type="text" name="nome"><br><br>
+			  <input type="text" name="nome" required><br><br>
 			
 			  <label>CPF: </label>
-			  <input type="cpf" name="cpf"><br><br>
+			  <input type="text" name="cpf" required><br><br>
+
+			  <label>E-mail: </label>
+			  <input type="email" name="email" required><br><br>
+
+			  <label>Telefone: </label>
+			  <input type="text" name="telefone"><br><br>
+
+			  <label>Celular: </label>
+			  <input type="text" name="celular" required><br><br>
 
 			  <label>Sexo: </label>
 			  <input type="radio" name="sexo" value="M"> Masculino
 			  <input type="radio" name="sexo" value="F"> Feminino<br><br>
 
+			  <label>RG: </label>
+			  <input type="text" name="rg"><br><br>
+
+			  <label>Nome da mãe: </label>
+			  <input type="text" name="nomemae" required><br><br>
+
+			  <label>Nome do pai: </label>
+			  <input type="text" name="nomepai"><br><br>
+
 			  <label>CEP: </label>
-			  <input type=text name=cep></p>
+			  <input type=text name=cep required></p>
+
+			  <label>Logradouro: </label>
+			  <input type="text" name="logradouro"><br><br>
+
+			  <label>Número: </label>
+			  <input type="text" name="numero"><br><br>
+
+			  <label>Bairro: </label>
+			  <input type="text" name="bairro"><br><br>
+
+			  <label>Cidade: </label>
+			  <input type="text" name="cidade"><br><br>
 
 			  <label>UF: </label>
 			    <select name="uf">

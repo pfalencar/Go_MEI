@@ -2,11 +2,18 @@
 session_start();
 include_once("Conexao.php");
 
+
+$result_mei = "SELECT * FROM mei WHERE id_usuario = '$_SESSION['id_usuario']'";
+$resultado_mei = mysqli_query($conexao, $result_mei);
+
+
+/*
 //$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-$id = $_SESSION['id_mei'];
+//$id = $_SESSION['id_mei'];k
 $result_mei = "SELECT * FROM mei WHERE id_mei = '$id'";
 $resultado_mei = mysqli_query($conexao, $result_mei);
 $row_mei = mysqli_fetch_assoc($resultado_mei);
+*/
 
 ?>
 
@@ -21,7 +28,7 @@ $row_mei = mysqli_fetch_assoc($resultado_mei);
 	<body>
 		<div class="cabecalho">
 			<h2> Olá, 
-	  		<?php  echo $_SESSION['nome']; ?>!
+	  		<?php  echo $_SESSION['nome_usuario']; ?>!
 			</h2>
 			<h2> <a href="logout.php"> Sair </a> </h2>
 		</div>
@@ -40,11 +47,17 @@ $row_mei = mysqli_fetch_assoc($resultado_mei);
 
 		<form action="proc_edit_mei.php" method="POST">
 				
+		<?php
+			while ( $row_mei = mysqli_fetch_assoc($resultado_mei) ) {
+		?>
 			
 			<input type="hidden" name="id" value="<?php echo $row_mei['id_mei']; ?>"></p>
 
 			<p>Nome: 
-				<input type=text name=nome value="<?php echo $row_mei['nome']; ?>"></p>
+				<input type=text name=nomecompleto value="<?php echo $row_mei['nomecompleto']; ?>"></p>
+
+			<p>Razão Social: 
+				<input type=text name=email value="<?php echo $row_mei['email']; ?>"></p>
 
 			<p>Razão Social: 
 				<input type=text name=razaosocial value="<?php echo $row_mei['razaosocial']; ?>"></p>
@@ -97,7 +110,11 @@ $row_mei = mysqli_fetch_assoc($resultado_mei);
 			<p>UF: 
 				<input type=text name=uf value="<?php echo $row_mei['uf']; ?>"></p>
 			<br><br>
-			  
+
+			<?php 
+				}
+			?> 
+			 
 		    <input type="submit" value="Editar">
 			
 			<br>

@@ -11,6 +11,7 @@ session_start();
   <body>
 
     <div>
+    	<a href="painel.php">Home</a><br><br>
     	<form action="cadastrar.php" method="POST">
 			  <h3>Cadastro de Usuário</h3>
 			  

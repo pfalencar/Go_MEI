@@ -2,8 +2,7 @@
 session_start();
 include_once("Conexao.php");
 
-//$id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
-$id = $_SESSION['id_mei'];
+$id_mei = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
 $razaosocial = filter_input(INPUT_POST, 'razaosocial', FILTER_SANITIZE_STRING);
 $cnpj = filter_input(INPUT_POST, 'cnpj', FILTER_SANITIZE_STRING);
 $ocupacaoprincipal = filter_input(INPUT_POST, 'ocupacaoprincipal', FILTER_SANITIZE_STRING);
@@ -23,14 +22,9 @@ $cidade = filter_input(INPUT_POST, 'cidade', FILTER_SANITIZE_STRING);
 $uf = filter_input(INPUT_POST, 'uf', FILTER_SANITIZE_STRING);
 
 /*
-echo "id: $id <br>";
+echo "id: $id_mei <br>";
 //echo "nome: $nome <br>";
 //echo "email: $email <br>";
-//echo "senha: $senha <br>";
-
-
-echo "razaosocial: $razaosocial <br>";
-echo "cnpj: $cnpj <br>";
 echo "ocupacaoprincipal: $ocupacaoprincipal <br>";
 echo "ocupacaosecundaria: $ocupacaosecundaria <br>";
 echo "cpf: $cpf <br>";
@@ -50,7 +44,7 @@ echo "uf: $uf <br>";
 
 
 
-$result_mei = "UPDATE mei SET razaosocial='$razaosocial', cnpj='$cnpj', ocupacaoprincipal='$ocupacaoprincipal', ocupacaosecundaria='$ocupacaosecundaria', cpf='$cpf', tel='$telefone', cel= '$celular', sexo='$sexo', rg='$rg', nome_mae='$nome_mae', nome_pai='$nome_pai', cep='$cep', logradouro='$logradouro', numero='$numero', bairro='$bairro', cidade='$cidade', uf='uf' WHERE id_mei = '$id'";
+$result_mei = "UPDATE mei SET razaosocial='$razaosocial', cnpj='$cnpj', ocupacaoprincipal='$ocupacaoprincipal', ocupacaosecundaria='$ocupacaosecundaria', cpf='$cpf', tel='$telefone', cel= '$celular', sexo='$sexo', rg='$rg', nome_mae='$nome_mae', nome_pai='$nome_pai', cep='$cep', logradouro='$logradouro', numero='$numero', bairro='$bairro', cidade='$cidade', uf='uf' WHERE id_mei = '$id_mei'";
 
 $resultado_mei = mysqli_query($conexao, $result_mei);
 
