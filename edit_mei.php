@@ -2,8 +2,8 @@
 session_start();
 include_once("Conexao.php");
 
-
-$result_mei = "SELECT * FROM mei WHERE id_usuario = '$_SESSION['id_usuario']'";
+$id_usuario = $_SESSION['id_usuario'];
+$result_mei = "SELECT * FROM mei WHERE id_usuario = '$id_usuario'";
 $resultado_mei = mysqli_query($conexao, $result_mei);
 
 
