@@ -14,7 +14,7 @@ session_start();
 		<div class="cabecalho">
 			<h2> Olá, 
 	  		<?php  echo $_SESSION['nome_usuario']; ?>!
-
+	  		
 			</h2>
 			<h2> <a href="logout.php"> Sair </a> </h2>
 		</div>
@@ -61,6 +61,9 @@ session_start();
 			
 			  <label>Nome completo: </label>
 			  <input type="text" name="nomecompleto" required><br><br>
+
+			  <label>E-mail: </label>
+			  <input type="email" name="email"><br><br>
 
 			  <label>Razao Social: </label>
 			  <input type="text" name="razaosocial" required><br><br>

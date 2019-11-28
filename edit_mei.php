@@ -56,8 +56,9 @@ $row_mei = mysqli_fetch_assoc($resultado_mei);
 			<p>Nome: 
 				<input type=text name=nomecompleto value="<?php echo $row_mei['nomecompleto']; ?>"></p>
 
-			<p>Razão Social: 
+			<p>E-mail: 
 				<input type=text name=email value="<?php echo $row_mei['email']; ?>"></p>
+
 
 			<p>Razão Social: 
 				<input type=text name=razaosocial value="<?php echo $row_mei['razaosocial']; ?>"></p>

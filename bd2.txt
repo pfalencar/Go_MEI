@@ -30,8 +30,8 @@ CREATE TABLE compra(
 );
 
 
-insert into compra (descricaocompra, dtcompra, valorcompra) values 
-('Compra1',NOW(), 50.21);
+insert into compra (id_fornecedor, id_mei, id_usuario, fornecedor, descricaocompra, dtcompra, valorcompra) values 
+('1', '1', '1', 'for chicletes', 'Compra1',NOW(), 50.21);
 select * from compra;
 
 ALTER TABLE `compra` ADD CONSTRAINT `fk_compra_id_fornecedor` FOREIGN KEY ( `id_fornecedor` ) REFERENCES `fornecedor` ( ` id_fornecedor ` ) ;

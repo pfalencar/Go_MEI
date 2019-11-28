@@ -41,7 +41,7 @@ echo "uf: $uf <br>";
 */
 
 
-$result_fornecedor = "UPDATE fornecedor SET nome_razaosocial='$nome_razaosocial', cpf_cnpj='$cpf_cnpj', inscricaoestadual='$inscricaoestadual', inscricaomunicipal='$inscricaomunicipal', email='$email', tel='$telefone', cel='$celular', sexo='$sexo', rg='$rg', nome_mae='$nomemae', nome_pai='$nomepai', cep='$cep', logradouro='$logradouro', numero='numero', bairro='$bairro', cidade='$cidade', uf='$uf' WHERE id_fornecedor = '$id'";
+$result_fornecedor = "UPDATE fornecedor SET nome_razaosocial='$nome_razaosocial', cpf_cnpj='$cpf_cnpj', inscricaoestadual='$inscricaoestadual', inscricaomunicipal='$inscricaomunicipal', email='$email', tel='$telefone', cel='$celular', sexo='$sexo', rg='$rg', nome_mae='$nomemae', nome_pai='$nomepai', cep='$cep', logradouro='$logradouro', numero='$numero', bairro='$bairro', cidade='$cidade', uf='$uf' WHERE id_fornecedor = '$id'";
 
 $resultado_usuario = mysqli_query($conexao, $result_fornecedor);
 

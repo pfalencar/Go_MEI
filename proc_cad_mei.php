@@ -4,7 +4,7 @@ include_once("Conexao.php");
 
 $id_usuario = $_SESSION['id_usuario'];
 $nomecompleto = filter_input(INPUT_POST, 'nomecompleto', FILTER_SANITIZE_STRING);
-$email = $_SESSION['email_usuario'];
+$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
 $razaosocial = filter_input(INPUT_POST, 'razaosocial', FILTER_SANITIZE_STRING);
 $cnpj = filter_input(INPUT_POST, 'cnpj', FILTER_SANITIZE_STRING);
 $ocupacaoprincipal = filter_input(INPUT_POST, 'ocupacaoprincipal', FILTER_SANITIZE_STRING);
@@ -24,10 +24,9 @@ $cidade = filter_input(INPUT_POST, 'cidade', FILTER_SANITIZE_STRING);
 $uf = filter_input(INPUT_POST, 'uf', FILTER_SANITIZE_STRING);
 
 /*
-echo "id: $id <br>";
-//echo "nome: $nome <br>";
-//echo "email: $email <br>";
-//echo "senha: $senha <br>";
+echo "id: $id_usuario <br>";
+echo "nome: $nomecompleto <br>";
+echo "email: $email <br>";
 echo "razaosocial: $razaosocial <br>";
 echo "cnpj: $cnpj <br>";
 echo "ocupacaoprincipal: $ocupacaoprincipal <br>";
