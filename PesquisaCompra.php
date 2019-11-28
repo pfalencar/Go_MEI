@@ -14,7 +14,7 @@ include("Conexao.php");
 	<body>		
 		<div class="cabecalho">
 			<h2> Olá, 
-	  		<?php  echo $_SESSION['nome']; ?>!
+	  		<?php  echo $_SESSION['nome_usuario']; ?>!
 			</h2>
 			<h2> <a href="logout.php"> Sair </a> </h2>
 		</div>
@@ -42,13 +42,14 @@ include("Conexao.php");
 		</form>	
 
 		<?php
+			$idusuario = $_SESSION['id_usuario'];
 			//recebendo o botão
 		    $SendPesqUser = filter_input(INPUT_POST, 'SendPesqUser', FILTER_SANITIZE_STRING);
 
 		  //verificando se clicou no botao
 		    if ($SendPesqUser) {
 		  	    $descricaoCompra = filter_input(INPUT_POST,'descricaoCompra', FILTER_SANITIZE_STRING);
-		    	$result_compra = "SELECT * FROM compra WHERE descricaocompra LIKE '%$descricaoCompra%'";
+		    	$result_compra = "SELECT * FROM compra WHERE id_usuario='$idusuario' AND descricaocompra LIKE '%$descricaoCompra%'";
 		  	    $resultado_compra = mysqli_query($conexao, $result_compra);
 		?>
 
@@ -58,6 +59,7 @@ include("Conexao.php");
 				<tr>
 					<th>Id Compra</th>
 					<th>Descrição</th>
+					<th>Nome do Fornecedor</th>
 					<th>Data</th>
 					<th>Valor</th>						
 				</tr>
@@ -70,6 +72,7 @@ include("Conexao.php");
 							"<tr>
 								<td>" . $row_compra['id_compra'] . "</td>
 								<td>" . $row_compra['descricaocompra'] . "</td>
+								<td>" . $row_compra['fornecedor'] . "</td>
 								<td>" . $row_compra['dtcompra'] . "</td>
 								<td>" . $row_compra['valorcompra'] . "</td>
 								<td><a href='edit_compra.php?id=" . $row_compra['id_compra'] . "'>Editar</a></td>

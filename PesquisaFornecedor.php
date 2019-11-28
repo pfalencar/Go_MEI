@@ -8,13 +8,13 @@ include("Conexao.php");
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Go! MEI - Pesquisar</title>
+		<title>Go! MEI - Pesquisar Fornecedor</title>
 	</head>
 
 	<body>		
 		<div class="cabecalho">
 			<h2> Olá, 
-	  		<?php  echo $_SESSION['nome']; ?>!
+	  		<?php  echo $_SESSION['nome_usuario']; ?>!
 			</h2>
 			<h2> <a href="logout.php"> Sair </a> </h2>
 		</div>
@@ -42,13 +42,14 @@ include("Conexao.php");
 		</form>	
 
 		<?php
+		  $idusuario = $_SESSION['id_usuario'];
 			//recebendo o botão
 		  $SendPesqUser = filter_input(INPUT_POST, 'SendPesqUser', FILTER_SANITIZE_STRING);
 
 		  //verificando se clicou no botao
 		  if ($SendPesqUser) {
 		  	$nomeFornecedor = filter_input(INPUT_POST,'nomeFornecedor', FILTER_SANITIZE_STRING);
-		  	$result_fornecedor = "SELECT * FROM fornecedor WHERE razaosocial LIKE '%$nomeFornecedor%'";
+		  	$result_fornecedor = "SELECT * FROM fornecedor WHERE id_usuario = '$idusuario' AND nome_razaosocial LIKE '%$nomeFornecedor%'";
 		  	$resultado_fornecedor = mysqli_query($conexao, $result_fornecedor);
 		?>
 
@@ -57,11 +58,23 @@ include("Conexao.php");
 				<table>
 					<tr>
 						<th>Id Fornecedor</th>
-						<th>Razão Social</th>
+						<th>Nome/Razão Social</th>
+						<th>CPF/CNPJ</th>
 						<th>Inscrição Estadual</th>
 						<th>Inscrição Municipal</th>
-						<th>Editar</th>
-						<th>Deletar</th>						
+						<th>E-mail</th>
+						<th>Telefone</th>	
+						<th>Celular</th>	
+						<th>Sexo</th>
+						<th>RG</th>
+						<th>Nome da mãe</th>
+						<th>Nome do pai</th>
+						<th>CEP</th>
+						<th>Logradouro</th>
+						<th>Número</th>
+						<th>Bairro</th>
+						<th>Cidade</th>
+						<th>UF</th>				
 					</tr>
 
 
@@ -69,14 +82,29 @@ include("Conexao.php");
 
 		  			while( $row_fornecedor = mysqli_fetch_assoc($resultado_fornecedor) ) {
 		
-							echo "	<tr>
-												<td>" . $row_fornecedor['id_fornecedor'] . "</td>
-												<td>" . $row_fornecedor['razaosocial'] . "</td>
-												<td>" . $row_fornecedor['inscricaoestadual'] . "</td>
-												<td>" . $row_fornecedor['inscricaomunicipal'] . "</td>
-												<td><a href='edit_fornecedor.php?id=" . $row_fornecedor['id_fornecedor'] . "'>Editar</a></td>
-												<td><a href='proc_apagar_fornecedor.php?id=" . $row_fornecedor['id_fornecedor'] . "'>Apagar</a></td>
-											</tr>";
+						echo 
+							"<tr>
+								<td>" . $row_fornecedor['id_fornecedor'] . "</td>
+								<td>" . $row_fornecedor['nome_razaosocial'] . "</td>
+								<td>" . $row_fornecedor['cpf_cnpj'] . "</td>
+								<td>" . $row_fornecedor['inscricaoestadual'] . "</td>
+								<td>" . $row_fornecedor['inscricaomunicipal'] . "</td>
+								<td>" . $row_fornecedor['email'] . "</td>
+								<td>" . $row_fornecedor['tel'] . "</td>
+								<td>" . $row_fornecedor['cel'] . "</td>
+								<td>" . $row_fornecedor['sexo'] . "</td>
+								<td>" . $row_fornecedor['rg'] . "</td>
+								<td>" . $row_fornecedor['nome_mae'] . "</td>
+								<td>" . $row_fornecedor['nome_pai'] . "</td>
+								<td>" . $row_fornecedor['cep'] . "</td>
+								<td>" . $row_fornecedor['logradouro'] . "</td>
+								<td>" . $row_fornecedor['numero'] . "</td>
+								<td>" . $row_fornecedor['bairro'] . "</td>
+								<td>" . $row_fornecedor['cidade'] . "</td>
+								<td>" . $row_fornecedor['uf'] . "</td>
+								<td><a href='edit_fornecedor.php?id=" . $row_fornecedor['id_fornecedor'] . "'>Editar</a></td>
+								<td><a href='proc_apagar_fornecedor.php?id=" . $row_fornecedor['id_fornecedor'] . "'>Apagar</a></td>
+							</tr>";
 		  			}
 			}
 					?>
