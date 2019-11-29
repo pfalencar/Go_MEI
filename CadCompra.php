@@ -41,14 +41,15 @@ include('conexao.php')
 
 				<label>Fornecedor: </label>
 				<select name=fornecedores>
+
 				<?php
 					while ($row_fornecedor = mysqli_fetch_assoc($resultado_fornecedores)) {
-						
 						echo "
 					       <option value= ". $row_fornecedor['id_fornecedor'] .">". $row_fornecedor['nome_razaosocial'] ."</option>;
 						";
 					 }
 				?>
+
 				</select>
 				
 				<?php					
@@ -67,6 +68,7 @@ include('conexao.php')
 				<br><br>
 				<p>Descrição da Compra: <input type=text name=descricaocompra></p>
 				<p>Valor da Compra: <input type=text name=valorcompra></p>
+				
 				<br><br>
 			    <input type="submit" value="Salvar" name="salvar">
 			

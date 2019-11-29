@@ -106,9 +106,9 @@ session_start();
 					<option value="RS">RS</option>
 					<option value="RO">RO</option>
 					<option value="RR">RR</option>
-					<option value="SC">SC</option>
+					<option value="SC">SC</option>				
 					
-					<option value="SP">SP</option>
+					<option value="SP" selected data-default>SP</option>
 					<option value="SE">SE</option>
 					<option value="TO">TO</option>
 					
