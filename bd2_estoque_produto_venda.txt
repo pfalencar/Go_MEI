@@ -1,0 +1,59 @@
+CREATE TABLE estoque(
+  id_estoque INT NOT NULL AUTO_INCREMENT,
+  id_usuario INT NOT NULL,
+  descricaoEstoque VARCHAR(200) NOT NULL,
+  preco DECIMAL(7,2) NOT NULL,
+  quantidade DECIMAL(7,2) NOT NULL,
+  dt DATETIME NOT NULL,
+  PRIMARY KEY (id_estoque),
+  FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario)
+) DEFAULT CHARSET = utf8;
+
+--------------------------------------------
+CREATE TABLE servico(
+  id_servico INT NOT NULL AUTO_INCREMENT,
+  id_usuario INT NOT NULL,
+  descricaoservico VARCHAR(200) NOT NULL,
+  precoservico DECIMAL(7,2) NOT NULL,
+  quantidadeservico DECIMAL(7,2) NOT NULL,
+  dt DATETIME NOT NULL,
+  PRIMARY KEY (id_servico),
+  FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario)
+) DEFAULT CHARSET = utf8;
+
+INSERT INTO servico (id_usuario, descricaoservico, precoservico, quantidadeservico, dt) VALUES ('1', 'Cortar grama', '20.00', '1.00', NOW());
+
+INSERT INTO servico (id_usuario, descricaoservico, precoservico, quantidadeservico, dt) VALUES ('1', 'Cortar cabelo', '20.00', '1.00', NOW());
+
+---------------------------------------------------
+CREATE TABLE vendaproduto (
+  id_venda INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id_mei INT,
+  id_cliente INT NOT NULL,
+  id_estoque  INT,
+  produto VARCHAR(200) NOT NULL,
+  dtvenda DATETIME NOT NULL,
+  qtd DECIMAL(7,2) NOT NULL,
+  valortotal DECIMAL(7,2) NOT NULL,
+  valorrecebido DECIMAL(7,2) NOT NULL,
+  troco DECIMAL(7,2) NOT NULL,
+  formapgto VARCHAR(20)
+) DEFAULT CHARSET = utf8;
+
+INSERT INTO vendaproduto (produto, dtvenda, qtd, valortotal, valorrecebido, troco, formapgto) VALUES ('agua mineral', NOW(), 2.00, 10.00, 20.00, 10.00, 'dinheiro');
+----------------------------------------------------
+CREATE TABLE vendaservico (
+  id_venda INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id_mei INT,
+  id_cliente  INT,
+  id_servico INT,
+  servico VARCHAR(200) NOT NULL,
+  dtvenda DATETIME NOT NULL,
+  qtd DECIMAL(7,2) NOT NULL,
+  valortotal DECIMAL(7,2) NOT NULL,
+  valorrecebido DECIMAL(7,2) NOT NULL,
+  troco DECIMAL(7,2) NOT NULL,
+  formapgto VARCHAR(20)
+) DEFAULT CHARSET = utf8;
+
+INSERT INTO vendaservico (servico, dtvenda, qtd, valortotal, valorrecebido, troco, formapgto) VALUES ('cortar cabelo', NOW(), 2.00, 10.00, 20.00, 10.00, 'dinheiro');

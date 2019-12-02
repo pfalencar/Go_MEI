@@ -3,63 +3,123 @@ session_start();
 include("Conexao.php");
 ?>
 
-
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>Go! MEI - Pesquisar Serviço</title>
-	</head>
+<head>
+<meta charset="utf-8">	
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="styles/styles.css"/>
+<link rel="stylesheet" type="text/css" href="styles/table.css"/>
+<link rel="stylesheet" type="text/css" href="styles/search.css"/>
+<link rel="stylesheet" type="text/css" href="styles/button.css"/>
+</head>
 
-	<body>		
-		<div class="cabecalho">
-			<h2> Olá, 
-	  		<?php  echo $_SESSION['nome']; ?>!
-			</h2>
-			<h2> <a href="logout.php"> Sair </a> </h2>
-		</div>
-		<hr>
+<body>
 
-		<p>Voltar para a <a href="painel.php">Página Inicial</a></p>
+<div class="header">
+	<div class="conexao">
+	<a  href="painel.php"><b>Voltar</b></a>
+ 	
+ 	</div>
 
+  <a class="logo" href="painel.php"><h1>Go! MEI</h1></a>
+  
+</div>
 
-		<h1>Pesquisar Serviço</h1>
+<div class="row">
+  <div class="col-3 col-s-3 menu">
+    <ul>
+	<li class="dropdown">
+    <a href="" class="dropbtn">Catálogo</a>
+    <div class="dropdown-content">
+       <a href="PesquisaEstoque.php">Estoque</a>
+      
+    </div>
+  </li>
+  <li class="dropdown">
+    <a href="" class="dropbtn">Vendas</a>
+    <div class="dropdown-content">
+	 <a href="PesquisaVenda.php">Vendas</a>
+      <a href="PesquisaCliente.php">Clientes</a>
+      </div>
+  </li>
+   <li class="dropdown">
+    <a href="" class="dropbtn">Compras</a>
+    <div class="dropdown-content">
+	  <a href="PesquisaCompra.php">Compras</a>
+      <a href="PesquisaFornecedor.php">Fornecedores</a>
+         
+    </div>
+  </li>
 
-		<a href="CadServico.php"> Novo </a>
+  <li class="dropdown">
+    <a href="" class="dropbtn">Funcionários</a>
+    <div class="dropdown-content">
+	  <a href="ViewFuncionario.php">Cadastrar Funcionário</a>
+      <a href="ViewContratacao.php">Contratar Funcionário</a>
+         
+    </div>
+  </li>
+  
+  <!--<a href="#">Relatórios</a>-->
+  
+   <li class="dropdown">
+    <a href="" class="dropbtn">Configurações</a>
+    <div class="dropdown-content">
+      <a href="meumei.php">Minha Empresa</a>
+      <a href="CadMEI.php">Meus Dados</a>
+	  <a href="Usuarios.html">Usuários</a>
+      <a href="logout.php">Sair</a>
+    </div>
+  </li>
+</ul>
+  </div>
 
-		<?php
+   <div class="col-6 col-s-9">
+  <h1>Serviços</h1>
+ <p><b>O cadastro de serviço traz eficiência na apuração dos dados, diminuindo erros e falhas no controle, e traz também agilidade, na hora da Venda. Efetue agora o cadastro de um novo Serviço! </b></p><br>
+
+ <a href="CadServico.php" class="button"><b>+ Adicionar</b></a>
+ <hr>
+
+ <?php
 			if( isset($_SESSION['msg']) ) {
 			  echo $_SESSION['msg'];
 			  unset($_SESSION['msg']);
 		  	}
 	  	?>
 
-		<form action="" method="POST"> 		
+	  	<p><b>Localize, Edite informações ou Exclua um serviço!</b></p>
+
+	  	<form action="" method="POST"> 		
 
 			<p><input type=text name=descricaoServico placeholder="Digite a descrição do Serviço" size="100" >
-			<input type="submit" name="SendPesqUser" value="Pesquisar" ></p>  
+			<button type="submit" class="button" name="SendPesqUser" value="Pesquisar"><b>pesquisar</b></button></p>  
 
-		</form>	
+		</form><br>
 
 		<?php
+
+		  $idusuario = $_SESSION['id_usuario'];
 			//recebendo o botão
 		  $SendPesqUser = filter_input(INPUT_POST, 'SendPesqUser', FILTER_SANITIZE_STRING);
 
 		  //verificando se clicou no botao
 		  if ($SendPesqUser) {
 		  	$descricaoServico = filter_input(INPUT_POST,'descricaoServico', FILTER_SANITIZE_STRING);
-		  	$result_servico = "SELECT * FROM servico WHERE descricaoservico LIKE '%$descricaoServico%'";
+		  	$result_servico = "SELECT * FROM servico WHERE id_usuario = '$idusuario' AND descricaoservico LIKE '%$descricaoServico%'";
 		  	$resultado_servico = mysqli_query($conexao, $result_servico);
 ?>
 
-		<div>
-				
-				<table>
-					<tr>
+		<table id="customers">
+		<tr>
 						<th>Id Serviço</th>
 						<th>Descrição do Serviço</th>
 						<th>Preço do Serviço</th>
-						<th>Quantidade de Serviço</th>					
+						<th>Quantidade de Serviço</th>
+						<th></th>
+						<th></th>					
 					</tr>
 
 
@@ -84,9 +144,23 @@ include("Conexao.php");
 			<br><br>
 			<br><br>	    
 			<br><br>
+			</div>
 
-		</div>
+  <!--<div class="col-3 col-s-12">
+    <div class="aside">
+      <h2>What?</h2>
+      <p>Chania is a city on the island of Crete.</p>
+      <h2>Where?</h2>
+      <p>Crete is a Greek island in the Mediterranean Sea.</p>
+      <h2>How?</h2>
+      <p>You can reach Chania airport from all over Europe.</p>
+    </div>
+  </div>-->
+</div>
 
-	</body>
+<div class="footer">
+  <p>Copyright © 2019 GO! MEI</p>
+</div>
 
-</html>
+</body>
+</html>	

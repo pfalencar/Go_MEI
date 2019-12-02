@@ -1,0 +1,27 @@
+cadastro ok
+cadastrar ok
+acessar ok
+login ok
+logout ok
+verifica_login ok
+painel ok
+PesquisaCliente ok
+CadCliente ok 
+proc_cad_cliente ok
+edit_cliente ok
+PesquisaEstoque ok
+CadEstoque ok
+proc_cad_estoque ok
+edit_estoque ok
+PesquisaFornecedor ok
+CadFornecedor ok
+proc_cad_fornecedor ok
+edit_fornecedor ok
+PesquisaServico ok
+CadServico ok
+proc_cad_serviço ok
+edit_servico ok
+procs_apgars ok
+procs_edits ok
+
+

@@ -2,6 +2,7 @@
 session_start();
 include_once("Conexao.php");
 
+$id_usuario = $_SESSION['id_usuario'];
 $descricaoServico = filter_input(INPUT_POST, 'descricaoServico', FILTER_SANITIZE_STRING);
 $precoServico = filter_input(INPUT_POST, 'precoServico', FILTER_SANITIZE_STRING);
 $quantidadeServico = filter_input(INPUT_POST, 'quantidadeServico', FILTER_SANITIZE_STRING);
@@ -13,7 +14,7 @@ echo "quantidade: $quantidadeServico <br>";
 */
 
 
-$result_servico = "INSERT INTO servico (descricaoservico, precoservico, quantidadeservico) VALUES ('$descricaoServico', '$precoServico', '$quantidadeServico')";
+$result_servico = "INSERT INTO servico (id_usuario, descricaoservico, precoservico, quantidadeservico, dt) VALUES ('$id_usuario','$descricaoServico', '$precoServico', '$quantidadeServico',NOW())";
 
 $resultado_servico = mysqli_query($conexao, $result_servico);
 

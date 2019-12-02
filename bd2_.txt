@@ -1,0 +1,138 @@
+create database gomei;
+use gomei;
+
+CREATE TABLE usuario (
+  id_usuario INT NOT NULL AUTO_INCREMENT,
+  nome_usuario VARCHAR(200) NOT NULL,
+  email_usuario VARCHAR(200) NOT NULL,
+  senha_usuario VARCHAR(32) NOT NULL,
+  PRIMARY KEY (id_usuario)
+);
+
+ALTER TABLE usuario CONVERT TO CHARACTER SET utf8;
+
+INSERT INTO usuario (nome_usuario, email_usuario, senha_usuario) values ('Maria','maria@gmail.com', md5('mmm'));
+SELECT * FROM usuario;
+==========================================================================================================
+CREATE TABLE compra(
+  id_compra INT NOT NULL AUTO_INCREMENT,
+  id_fornecedor INT NOT NULL,
+  id_mei INT NOT NULL,
+  id_usuario INT NOT NULL,
+  fornecedor VARCHAR(200) NOT NULL, 
+  descricaocompra VARCHAR(200) NOT NULL,
+  dtcompra DATETIME NOT NULL,
+  valorcompra DECIMAL(7,2) NOT NULL,
+  PRIMARY KEY (id_compra),
+  FOREIGN KEY (id_fornecedor) REFERENCES fornecedor(id_fornecedor),
+  FOREIGN KEY (id_mei) REFERENCES mei (id_mei),
+  FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario)
+);
+
+
+insert into compra (id_fornecedor, id_mei, id_usuario, fornecedor, descricaocompra, dtcompra, valorcompra) values 
+('1', '1', '1', 'for chicletes', 'Compra1',NOW(), 50.21);
+select * from compra;
+
+ALTER TABLE `compra` ADD CONSTRAINT `fk_compra_id_fornecedor` FOREIGN KEY ( `id_fornecedor` ) REFERENCES `fornecedor` ( ` id_fornecedor ` ) ;
+ALTER TABLE `compra` ADD CONSTRAINT `fk_compra_id_mei` FOREIGN KEY ( `id_mei` ) REFERENCES `mei` ( ` id_mei ` ) ;
+
+===================================================================================
+
+CREATE TABLE fornecedor (
+  id_fornecedor INT NOT NULL AUTO_INCREMENT,
+  id_usuario INT NOT NULL,
+  nome_razaosocial VARCHAR(200) NOT NULL,
+  cpf_cnpj VARCHAR(20) NOT NULL,
+  inscricaoestadual VARCHAR(20) NOT NULL,
+  inscricaomunicipal VARCHAR(32) NOT NULL,
+  email VARCHAR(200) NOT NULL,
+  tel VARCHAR(20),
+  cel VARCHAR(20) NOT NULL,
+  sexo CHAR(1),
+  rg VARCHAR(20),
+  nome_mae VARCHAR(200),
+  nome_pai VARCHAR(200),
+  cep VARCHAR(20) NOT NULL,
+  logradouro VARCHAR(200),
+  numero VARCHAR(10) NOT NULL, 
+  bairro VARCHAR(100),
+  cidade VARCHAR(200),
+  uf CHAR(2),
+  PRIMARY KEY (id_fornecedor),
+  FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario)
+) DEFAULT CHARSET = utf8;
+
+INSERT INTO fornecedor (id_usuario, nome_razaosocial, cpf_cnpj, inscricaoestadual, inscricaomunicipal, email, tel, cel, sexo, rg, nome_mae, nome_pai, cep, logradouro, numero, bairro, cidade, uf) VALUES
+('2', 'For Chocolates em barra', '23456789/0001', '23456789/0001SP', '123456100/00015SP', 'chocolatesbarra@gmail.com', '(11) 5748-4567', '(11) 95748-4567', '', '', '', '', '05678-125', 'Rua das Flores', '127', 'Jd. Marília','São Paulo', 'SP');
+
+
+UPDATE fornecedor SET nome_razaosocial='$nome_razaosocial', cpf_cnpj='$cpf_cnpj', inscricaoestadual='$inscricaoestadual', inscricaomunicipal='$inscricaomunicipal', email='$email', tel='$telefone', cel='$celular', sexo='$sexo', rg='$rg', nome_mae='$nomemae', nome_pai='$nomepai', cep='$cep', logradouro='$logradouro', numero='numero', bairro='$bairro', cidade='$cidade', uf='$uf' WHERE id_fornecedor = '$id';
+===================================================================================
+CREATE TABLE mei (
+  id_mei INT NOT NULL AUTO_INCREMENT,
+  id_usuario INT NOT NULL,
+  nomecompleto varchar(200) NOT NULL,
+  email VARCHAR(200) NOT NULL,
+  razaosocial VARCHAR(200) NOT NULL,
+  cnpj VARCHAR(20) NOT NULL,
+  ocupacaoprincipal VARCHAR(200) NOT NULL,
+  ocupacaosecundaria VARCHAR(200),
+  cpf VARCHAR(15) NOT NULL,
+  tel VARCHAR(20),
+  cel VARCHAR(20) NOT NULL,
+  sexo CHAR(1) NOT NULL,
+  rg VARCHAR(20),
+  nome_mae VARCHAR(200) NOT NULL,
+  nome_pai VARCHAR(200),
+  cep VARCHAR(20) NOT NULL,
+  logradouro VARCHAR(200),
+  numero VARCHAR(10) NOT NULL, 
+  bairro VARCHAR(100),
+  cidade VARCHAR(200),
+  uf CHAR(2),
+  PRIMARY KEY (id_mei),
+  FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario)
+) DEFAULT CHARSET = utf8;
+
+ALTER TABLE mei CONVERT TO CHARACTER SET utf8;
+
+INSERT INTO mei (id_usuario, nomecompleto, email, razaosocial, cnpj, ocupacaoprincipal, ocupacaosecundaria, cpf, tel, cel, sexo, rg, nome_mae, nome_pai, cep, logradouro, numero, bairro, cidade, uf) VALUES ('$id_usuario', '$nomecompleto', '$email', '$razaosocial', '$cnpj', '$ocupacaoprincipal', '$ocupacaosecundaria', '$cpf', '$telefone', '$celular', '$sexo', '$rg', '$nome_mae', '$nome_pai', '$cep', '$logradouro', '$numero', '$bairro', '$cidade', '$uf')
+
+UPDATE mei SET razaosocial='Paloma Ltda', cnpj='123456789-78', ocupacaoprincipal='programadora independente', ocupacaosecundaria='Professora', cpf='456789123-00', tel='51 45678932', cel = '51 45678923', sexo='F', rg='789435498-3', nome_mae='Dona Lucrécia', nome_pai='Seu Sebastião', cep='06812-154', logradouro='Rua Boituva', numero='45A', bairro='São Nicolau', cidade='Porto Alegre', uf='RS' WHERE id_mei = '1'
+
+
+UPDATE mei SET razaosocial ='Paloma Ltda.', cnpj='123456789-78', ocupacaoprincipal='programadora independente' WHERE email='paloma@gmail.com'
+UPDATE mei SET razaosocial= , cnpj= , ocupacaoprincipal= WHERE email=$email;
+
+===============================================================================================
+CREATE TABLE cliente (
+  id_cliente INT NOT NULL AUTO_INCREMENT,
+  id_usuario INT NOT NULL,
+  nome VARCHAR(200) NOT NULL,
+  cpf VARCHAR(20) NOT NULL,
+  email VARCHAR(200) NOT NULL,
+  tel VARCHAR(20),
+  cel VARCHAR(20) NOT NULL,
+  sexo CHAR(1) NOT NULL,
+  rg VARCHAR(20),
+  nome_mae VARCHAR(200)  NOT NULL,
+  nome_pai VARCHAR(200),
+  cep VARCHAR(20)  NOT NULL,
+  logradouro VARCHAR(200),
+  numero VARCHAR(10)  NOT NULL, 
+  bairro VARCHAR(100),
+  cidade VARCHAR(200),
+  uf CHAR(2),
+  primary key (id_cliente),
+  FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario)
+) DEFAULT CHARSET = utf8;
+
+SELECT * FROM cliente WHERE id_usuario = '1' AND nome LIKE '%%'
+
+insert into cliente (nome, cpf, email, tel, cel, genero, rg, nome_mae, nome_pai, cep, logradouro, numerocasa, bairro, cidade, uf) values 
+('Cliente1','123456789-00','c1@gmail.com','11-5679-1234','11 9 8745-6845','F', '78597123-8','Mãe Cliente1','Pai Cliente1', '068123-450','Rua Amadeus da Silva','45B', 'Brooklin','São Paulo','SP');
+select * from cliente;
+
+
+==========================================================================================================

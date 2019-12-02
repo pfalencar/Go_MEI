@@ -20,7 +20,7 @@ $row_compra = mysqli_fetch_assoc($resultado_compra);
 	<body>
 		<div class="cabecalho">
 			<h2> Olá, 
-	  		<?php  echo $_SESSION['nome_usuario']; ?>!
+	  		<?php  echo $_SESSION['nome']; ?>!
 			</h2>
 			<h2> <a href="logout.php"> Sair </a> </h2>
 		</div>
@@ -42,9 +42,6 @@ $row_compra = mysqli_fetch_assoc($resultado_compra);
 				
 			
 			<input type="hidden" name="id" value="<?php echo $row_compra['id_compra']; ?>"></p>
-
-			<p>Fornecedor: 
-				<input type=text name=descricaocompra value="<?php echo $row_compra['fornecedor']; ?>"></p>
 
 			<p>Descrição da Compra: 
 				<input type=text name=descricaocompra value="<?php echo $row_compra['descricaocompra']; ?>"></p>

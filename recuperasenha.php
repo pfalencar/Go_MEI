@@ -1,5 +1,6 @@
 <?php
 session_start();
+include("conexao.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,27 +12,26 @@ session_start();
 <body>
 
 <div class="header">
-	
-  <a class="logo" href="index.php"><h1>Go! MEI</h1></a>
-  
+	  <a class="logo" href="index.php"><h1>Go! MEI</h1></a>
 </div>
 
 <div class="row">
   <div class="col-3 col-s-3 menu">
-  
+   
   </div>
 
   <div class="col-6 col-s-9">
-   <form action="cadastrar.php" method="POST">
+      <form action="proc_recupera_senha.php" method="POST">
   <div class="container">
-    <h3>Cadastro de Usuário</h3>
-    <p>Por favor, preencha este formulário para criar uma conta</p>
+    <h2> Informe seu email </h2>
+
     <hr>
+
     <?php
           if (isset($_SESSION['status_cadastro'])):
         ?>    
           <div>
-           <strong><p style="color: lightgreen">Cadastro efetuado com sucesso!</p></strong><hr><p>Faça o login <a href="acessar.php">aqui</a></p>
+           <strong><p style="color: red">O email informado não existe!<p></strong></p>
           </div>      
         <?php
           endif;
@@ -41,36 +41,27 @@ session_start();
         <?php
           if (isset($_SESSION['usuario_existe'])):
         ?>      
-          <div style="color: red">
-            <strong><p> O usuário escolhido já existe! Informe outro e tente novamente.</p></strong>
+          <div style="color: green">
+            <strong><p>A senha foi encaminhada para seu email.</p></strong>
           </div>
         <?php
           endif;
           unset($_SESSION['usuario_existe']);
         ?>
 
-        <br>
-
-    <label for="nome"><b>Nome</b></label>
-    <input type="text" placeholder="Informe seu eome" name="nome" required>
-
     <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Informe seu email" name="email" required>
+    <input type="text" placeholder="Informe o email" name="email" required>
 
-    <label for="senha"><b>Senha</b></label>
-    <input type="password" placeholder="Informe sua senha" name="senha" required>
-    <hr>
-    <p>Ao criar uma conta, você concorda com nossos <a href="#">Termos e Privacidade</a>.</p>
 
-    <button type="submit" class="registerbtn">Cadastrar</button>
+    <button type="submit" class="registerbtn">Enviar</button>
   </div>
   
   <div class="container signin">
-    <p>já tem uma conta?<a href="acessar.php">Faça login</a>.</p>
+      <a href="cadastro.php"> Não é cadastrado? Cadastre-se! </a>
   </div>
 </form>
 
- 
+  
   </div>
 
   <!--<div class="col-3 col-s-12">
@@ -86,7 +77,7 @@ session_start();
 </div>
 
 <div class="footer">
-  <p>Copyright © 2019 Lorem Ipsum</p>
+  <p>Copyright © 2019 Go! MEI</p>
 </div>
 
 </body>

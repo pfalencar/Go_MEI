@@ -1,53 +1,107 @@
 <?php
 session_start();
 include_once("Conexao.php");
-
 $id_usuario = $_SESSION['id_usuario'];
 $result_mei = "SELECT * FROM mei WHERE id_usuario = '$id_usuario'";
 $resultado_mei = mysqli_query($conexao, $result_mei);
 
-
-/*
-//$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-//$id = $_SESSION['id_mei'];k
-$result_mei = "SELECT * FROM mei WHERE id_mei = '$id'";
-$resultado_mei = mysqli_query($conexao, $result_mei);
-$row_mei = mysqli_fetch_assoc($resultado_mei);
-*/
-
 ?>
 
-
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>Go! MEI - Editar MEI</title>
-	</head>
+<html lang="pt-BR">
+<head>
+<title>Go! MEI</title>	
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="styles/styles.css"/>
+<link rel="stylesheet" type="text/css" href="styles/forms.css"/>
+</head>
 
-	<body>
-		<div class="cabecalho">
-			<h2> Olá, 
-	  		<?php  echo $_SESSION['nome_usuario']; ?>!
-			</h2>
-			<h2> <a href="logout.php"> Sair </a> </h2>
-		</div>
-		<hr>
-		<a href="painel.php">Home</a><br>
-		<a href="CadMEI.php">Cadastrar MEI</a><br>
+<body>
 
-		<h2> Editar MEI </h2>
+<div class="header">
+	<div class="conexao">
+	<a  href="painel.php"><b>Voltar</b></a>
+ 	
+ 	</div>
 
-		<?php
-		  if( isset($_SESSION['msg']) ) {
-			  echo $_SESSION['msg'];
-			  unset($_SESSION['msg']);
-		  }
+   <a class="logo" href="painel.php"><h1>Go! MEI</h1></a>
+  
+</div>
+
+<div class="row">
+  <div class="col-3 col-s-3 menu">
+    <ul>
+	<li class="dropdown">
+    <a href="" class="dropbtn">Catálogo</a>
+    <div class="dropdown-content">
+       <a href="PesquisaEstoque.php">Estoque</a>
+	  <a href="PesquisaServico.php">Serviços</a>
+	
+      
+    </div>
+  </li>
+  <li class="dropdown">
+    <a href="" class="dropbtn">Vendas</a>
+    <div class="dropdown-content">
+	 <a href="ViewVenda.php">Vendas</a>
+      <a href="PesquisaCliente.php">Clientes</a>
+      </div>
+  </li>
+   <li class="dropdown">
+    <a href="" class="dropbtn">Compras</a>
+    <div class="dropdown-content">
+	  <a href="PesquisaCompra.php">Compras</a>
+      <a href="PesquisaFornecedor.php">Fornecedores</a>
+         
+    </div>
+  </li>
+
+  <li class="dropdown">
+    <a href="" class="dropbtn">Funcionários</a>
+    <div class="dropdown-content">
+	  <a href="ViewFuncionario.php">Cadastrar Funcionário</a>
+      <a href="ViewContratacao.php">Contratar Funcionário</a>
+         
+    </div>
+  </li>
+  
+  <!--<a href="#">Relatórios</a>-->
+  
+   <li class="dropdown">
+    <a href="" class="dropbtn">Configurações</a>
+    <div class="dropdown-content">
+      <a href="meumei.php">Minha Empresa</a>
+      
+	  <a href="Usuarios.html">Usuários</a>
+      <a href="logout.php">Sair</a>
+    </div>
+  </li>
+</ul>
+  </div>
+
+  <div class="col-6 col-s-9">
+    <h1>Meus Dados - MEI</h1><form action="" method="POST"><button type="submit" name="pressbutton" value="editar">Alterar informações</button></form>
+    <a href="CadMEI.php">Sem registros? Clique aqui para cadastrar seu MEI </a>
+
+    <?php
+			if( isset($_SESSION['msg']) ) {
+				echo $_SESSION['msg'];
+				unset($_SESSION['msg']);
+			}
 		?>
 
+
+
 		<form action="proc_edit_mei.php" method="POST">
+
+			<div class="container">
+            <h2>Dados Gerais</h2>
+	        <hr>
 				
-		<?php
+			
+			<?php
 			while ( $row_mei = mysqli_fetch_assoc($resultado_mei) ) {
 		?>
 			
@@ -56,9 +110,8 @@ $row_mei = mysqli_fetch_assoc($resultado_mei);
 			<p>Nome: 
 				<input type=text name=nomecompleto value="<?php echo $row_mei['nomecompleto']; ?>"></p>
 
-			<p>E-mail: 
+			<p>Email: 
 				<input type=text name=email value="<?php echo $row_mei['email']; ?>"></p>
-
 
 			<p>Razão Social: 
 				<input type=text name=razaosocial value="<?php echo $row_mei['razaosocial']; ?>"></p>
@@ -115,22 +168,44 @@ $row_mei = mysqli_fetch_assoc($resultado_mei);
 			<?php 
 				}
 			?> 
-			 
-		    <input type="submit" value="Editar">
-			
-			<br>
+			<?php
+
+			$pb = filter_input(INPUT_POST, 'pressbutton', FILTER_SANITIZE_STRING);
+
+			if($pb) {
+			  
+		    echo '<button type="submit" class="registerbtn"  value="Salvar">Salvar</button>';
+		}
+		else
+		{
+			echo "";
+		}
+
+			?>
+			</div>
+			<?php is_null($pb); ?>
 			
 		</form>
 
-		
+		</div>
 
 
+  <!--<div class="col-3 col-s-12">
+    <div class="aside">
+      <h2>What?</h2>
+      <p>Chania is a city on the island of Crete.</p>
+      <h2>Where?</h2>
+      <p>Crete is a Greek island in the Mediterranean Sea.</p>
+      <h2>How?</h2>
+      <p>You can reach Chania airport from all over Europe.</p>
+    </div>
+  </div>-->
 
+</div>
 
+<div class="footer">
+  <p>Copyright © 2019 Go! MEI</p>
+</div>
 
-	</body>
-
+</body>
 </html>
-
-
-
